@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     macos:
-      xcode: "15.4”  # Use the Xcode version compatible with your project
+      xcode: "15.4”
     working_directory: ~/project
     steps:
       - checkout  # Pull the code from the repository
