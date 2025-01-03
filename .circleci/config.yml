@@ -3,7 +3,7 @@ version: 2.1
 executors:
   macos_executor:
     macos:
-      xcode: "15.4.0"
+      xcode: "15.4"
 
 jobs:
   build-and-test:
@@ -19,7 +19,7 @@ jobs:
               -project CircleCi.xcodeproj \
               -scheme CircleCi \
               -sdk iphonesimulator \
-              -destination 'platform=iOS Simulator,name=iPhone 14' \
+              -destination 'platform=iOS Simulator,name=iPhone 13' \
               clean test
 
       # Build the app
@@ -30,7 +30,7 @@ jobs:
               -project CircleCi.xcodeproj \
               -scheme CircleCi \
               -sdk iphonesimulator \
-              -destination 'platform=iOS Simulator,name=iPhone 14' \
+              -destination 'platform=iOS Simulator,name=iPhone 13' \
               clean build
 
 workflows:
