@@ -1,42 +1,43 @@
 version: 2.1
 
-executors:
-  macos_executor:
+jobs:
+  build:
     macos:
       xcode: "15.4.0"
-
-jobs:
-  build-and-test:
-    executor: macos_executor
+    environment:
+      FL_OUTPUT_DIR: output
     steps:
       - checkout
 
-      # Run tests
       - run:
-          name: Run Tests
+          name: Build the app
           command: |
-            xcodebuild \
-              -project CircleCi.xcodeproj \
+            xcodebuild -project CircleCi.xcodeproj \
               -scheme CircleCi \
               -sdk iphonesimulator \
-              -destination 'platform=iOS Simulator,name=iPhone 14' \
-              clean test
+              -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2' \
+              clean build  # Build the app
 
-      # Build the app
       - run:
-          name: Build App
+          name: Run Unit Tests
           command: |
-            xcodebuild \
-              -project CircleCi.xcodeproj \
+            xcodebuild test -project CircleCi.xcodeproj \
               -scheme CircleCi \
               -sdk iphonesimulator \
-              -destination 'platform=iOS Simulator,name=iPhone 14' \
-              clean build
+              -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2'  # Run unit tests
+
+      - run:
+          name: Run UI Tests
+          command: |
+            xcodebuild test -project CircleCi.xcodeproj \
+              -scheme CircleCiUITests \
+              -sdk iphonesimulator \
+              -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2'  # Run UI tests (if applicable)
 
 workflows:
   version: 2
-  test-and-build:
+  build_and_test:
     jobs:
-      - build-and-test
+      - build 
 
 
