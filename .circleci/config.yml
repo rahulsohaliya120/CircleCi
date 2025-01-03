@@ -3,10 +3,19 @@ version: 2.1
 jobs:
   build:
     macos:
-      xcode: "14.3.1"  # Use the Xcode version compatible with your project
+      xcode: "14.3.1"  # Make sure the Xcode version matches your project requirements
     working_directory: ~/project
     steps:
       - checkout  # Pull the code from the repository
+
+      # Debug the working directory
+      - run:
+          name: Debug Current Directory and Files
+          command: |
+            echo "Current directory:"
+            pwd
+            echo "Contents:"
+            ls -R
 
       - run:
           name: Build the Project
