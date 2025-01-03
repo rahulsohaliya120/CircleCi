@@ -1,37 +1,47 @@
 version: 2.1
 
 executors:
-  macos-executor:
-    machine:
-      macos:
-        xcode: 14.4.1
-    working_directory: ~/workspace
+  macos_executor:
+    macos:
+      xcode: "15.4.0"
 
 jobs:
-  build:
-    executor: macos-executor
+  build-and-test:
+    executor: macos_executor
     steps:
-      - checkout # Check out the source code
+      - checkout
+
+      # Install dependencies (skip SPM/CocoaPods as per your requirement)
       - run:
-          name: Build the App
+          name: Install Dependencies
           command: |
-            xcodebuild clean build -workspace /Users/dreamworld/Documents/CircleCI\:CD/CircleCi.xcworkspace -scheme CircleCi -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=latest'
-          
-  test:
-    executor: macos-executor
-    steps:
-      - checkout # Check out the source code
+            echo "No additional dependencies to install."
+
+      # Run tests
       - run:
-          name: Run Unit Tests
+          name: Run Tests
           command: |
-            xcodebuild test -workspace /Users/dreamworld/Documents/CircleCI\:CD/CircleCi.xcworkspace -scheme CircleCi -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=latest'
+            xcodebuild \
+              -workspace YourProject.xcworkspace \
+              -scheme CircleCi \
+              -sdk iphonesimulator \
+              -destination 'platform=iOS Simulator,name=iPhone 14' \
+              clean test
+
+      # Build the app
+      - run:
+          name: Build App
+          command: |
+            xcodebuild \
+              -workspace YourProject.xcworkspace \
+              -scheme CircleCi \
+              -sdk iphonesimulator \
+              -destination 'platform=iOS Simulator,name=iPhone 14' \
+              clean build
 
 workflows:
   version: 2
-  build_and_test:
+  test-and-build:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - build-and-test
 
