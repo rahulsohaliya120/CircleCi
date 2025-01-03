@@ -9,20 +9,10 @@ jobs:
       - checkout  # Pull the code from the repository
 
       - run:
-          name: Install Cocoapods (if required)
-          command: |
-            if [ -f "Podfile" ]; then
-              brew install cocoapods || true
-              pod install
-            else
-              echo "No Podfile found. Skipping pod install."
-            fi
-
-      - run:
           name: Build the Project
           command: |
             xcodebuild build \
-            -workspace YourProject.xcworkspace \
+            -project YourProject.xcodeproj \
             -scheme YourScheme \
             -destination 'generic/platform=iOS' \
             CODE_SIGNING_ALLOWED=NO
