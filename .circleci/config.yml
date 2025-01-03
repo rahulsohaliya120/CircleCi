@@ -11,18 +11,12 @@ jobs:
     steps:
       - checkout
 
-      # Install dependencies (skip SPM/CocoaPods as per your requirement)
-      - run:
-          name: Install Dependencies
-          command: |
-            echo "No additional dependencies to install."
-
       # Run tests
       - run:
           name: Run Tests
           command: |
             xcodebuild \
-              -workspace YourProject.xcworkspace \
+              -project CircleCi.xcodeproj \
               -scheme CircleCi \
               -sdk iphonesimulator \
               -destination 'platform=iOS Simulator,name=iPhone 14' \
@@ -33,7 +27,7 @@ jobs:
           name: Build App
           command: |
             xcodebuild \
-              -workspace YourProject.xcworkspace \
+              -project CircleCi.xcodeproj \
               -scheme CircleCi \
               -sdk iphonesimulator \
               -destination 'platform=iOS Simulator,name=iPhone 14' \
@@ -44,4 +38,5 @@ workflows:
   test-and-build:
     jobs:
       - build-and-test
+
 
