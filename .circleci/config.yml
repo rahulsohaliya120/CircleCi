@@ -2,8 +2,9 @@ version: 2.1
 
 executors:
   macos-executor:
-    macos:
-      version: 14.4.1
+    machine:
+      macos:
+        xcode: 14.4.1
     working_directory: ~/workspace
 
 jobs:
