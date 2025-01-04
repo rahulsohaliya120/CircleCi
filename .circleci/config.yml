@@ -7,52 +7,35 @@ jobs:
     environment:
       FL_OUTPUT_DIR: output
     steps:
-      # Checkout the project
       - checkout
 
-      # Install CocoaPods dependencies
       - run:
-          name: Install CocoaPods Dependencies
+          name: Build the app
           command: |
-            gem install cocoapods --user-install
-            pod install
-            
-      - run:
-          name: Install Provisioning Profile
-          command: |
-            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-            echo "$PROVISIONING_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/Understeer_Pro_Profile.mobileprovision
-
-      # Build the app
-      - run:
-          name: Build the App
-          command: |
-            xcodebuild -workspace CircleCi.xcworkspace \
+            xcodebuild -project CircleCi.xcodeproj \
               -scheme CircleCi \
               -sdk iphonesimulator \
               -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2' \
-              clean build
+              clean build  # Build the app
 
-      # Run Unit Tests
       - run:
           name: Run Unit Tests
           command: |
-            xcodebuild test -workspace CircleCi.xcworkspace \
+            xcodebuild test -project CircleCi.xcodeproj \
               -scheme CircleCi \
               -sdk iphonesimulator \
-              -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2'
+              -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2'  # Run unit tests
 
-      # Run UI Tests (if applicable)
       - run:
           name: Run UI Tests
           command: |
-            xcodebuild test -workspace CircleCi.xcworkspace \
+            xcodebuild test -project CircleCi.xcodeproj \
               -scheme CircleCiUITests \
               -sdk iphonesimulator \
-              -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2'
+              -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2'  # Run UI tests (if applicable)
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build 

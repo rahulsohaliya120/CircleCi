@@ -6,8 +6,6 @@ target 'CircleCi' do
   use_frameworks!
 
   # Pods for CircleCi
-  pod 'Alamofire'
-  pod 'SDWebImage', '5.13.4'
   pod 'CocoaDebug', '1.7.7'
 
   target 'CircleCiTests' do
