@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-CircleCi-CircleCiUITests/Pods-CircleCi-CircleCiUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/CocoaDebug/CocoaDebug.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework

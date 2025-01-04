@@ -1,0 +1,26 @@
+PODS:
+  - Alamofire (5.10.2)
+  - CocoaDebug (1.7.7)
+  - SDWebImage (5.13.4):
+    - SDWebImage/Core (= 5.13.4)
+  - SDWebImage/Core (5.13.4)
+
+DEPENDENCIES:
+  - Alamofire
+  - CocoaDebug (= 1.7.7)
+  - SDWebImage (= 5.13.4)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - CocoaDebug
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  CocoaDebug: b38d31464b91a9775928f8667d114db07b136565
+  SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
+
+PODFILE CHECKSUM: 6df10b7b1147a88d8f48c7fcbd1d7ba2a548460b
+
+COCOAPODS: 1.16.2
