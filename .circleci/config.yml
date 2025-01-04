@@ -16,6 +16,12 @@ jobs:
           command: |
             gem install cocoapods --user-install
             pod install
+            
+      - run:
+          name: Install Provisioning Profile
+          command: |
+            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+            echo "$PROVISIONING_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/Understeer_Pro_Profile.mobileprovision
 
       # Build the app
       - run:
@@ -50,6 +56,3 @@ workflows:
   build_and_test:
     jobs:
       - build
-
-
-
